@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  :root {
+    --color-primary: #2563EB;
+    --color-secondary: #3B82F6;
+    --color-cta: #F97316;
+    --color-background: #F8FAFC;
+    --color-text: #1E293B;
+
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+  }
+
+  body {
+    @apply font-body text-[var(--color-text)] bg-[var(--color-background)] antialiased m-0 p-0;
+  }
+}
+
+@layer components {
+  /* Primary Button */
+  .btn-primary {
+    @apply bg-[var(--color-cta)] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 ease-in-out cursor-pointer hover:opacity-90 hover:-translate-y-px;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply bg-transparent text-[var(--color-primary)] border-2 border-[var(--color-primary)] px-6 py-3 rounded-lg font-semibold transition-all duration-200 ease-in-out cursor-pointer hover:bg-blue-50;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-[12px] p-6 shadow-[var(--shadow-md)] transition-all duration-200 ease-in-out cursor-pointer hover:shadow-[var(--shadow-lg)] hover:-translate-y-0.5;
+  }
+
+  /* Inputs */
+  .input {
+    @apply px-4 py-3 border border-slate-200 rounded-lg text-base transition-colors duration-200 ease-in-out focus:border-[var(--color-primary)] focus:outline-none focus:ring-4 focus:ring-blue-500/20;
+  }
+
+  .pulse-shadow {
+    animation: pulse-shadow 2s infinite;
+  }
+
+  @keyframes pulse-shadow {
+    0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+  }
+
+  .animate-in {
+    animation: animate-in 0.5s ease-out forwards;
+  }
+
+  @keyframes animate-in {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+}
