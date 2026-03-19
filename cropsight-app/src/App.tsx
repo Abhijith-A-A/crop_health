@@ -1,15 +1,39 @@
 import { useState } from 'react';
 import ImageAnalyzer from './components/ImageAnalyzer';
-import MapPage from './components/MapPage';
-import HistoryPage from './components/HistoryPage';
+import MapPage from './pages/MapPage';
+import HistoryPage from './pages/HistoryPage';
 import VoiceAssistant from './components/VoiceAssistant';
-import WeatherPage from './components/WeatherPage';
+import WeatherPage from './pages/WeatherPage';
 import { Layers, Map as MapIcon, History, CloudSun } from 'lucide-react';
 import type { HistoryItem } from './types';
 
+const MOCK_SCAN: HistoryItem = {
+  id: 'demo-123',
+  imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop', // A lush green field
+  imageAspectRatio: 1.5,
+  date: new Date('2026-03-18T10:00:00Z'),
+  geoTag: { lat: 38.5624, lng: -121.5830 },
+  result: {
+    overallHealth: "Moderate Nitrogen Deficiency",
+    isHealthy: false,
+    plantCount: 4250,
+    yieldEstimate: "4.8 Tons/Acre",
+    farmContext: "California Central Valley Almond Orchard. Early leaf wilting detected in North-West quadrant. Soil moisture levels are nominal but chlorophyll indices indicate nutrient stress.",
+    zones: [
+      { ymin: 20, xmin: 30, ymax: 50, xmax: 60, label: "Nitrogen Stress", severityScore: 68, colorCode: "#f59e0b", action: "Apply urea-based fertilizer within 48 hours." },
+      { ymin: 70, xmin: 10, ymax: 90, xmax: 40, label: "Healthy Canopy", severityScore: 12, colorCode: "#22c55e", action: "No immediate action. Maintain 4-day irrigation cycle." }
+    ],
+    marks: [
+      { ymin: 45, xmin: 55, ymax: 47, xmax: 57, label: "Aphid Cluster", colorCode: "#ef4444" }
+    ],
+    weedPath: [{y: 10, x: 10}, {y: 20, x: 80}, {y: 90, x: 50}],
+    irrigationLeaks: []
+  }
+};
+
 function App() {
   const [activeTab, setActiveTab] = useState<'analysis' | 'map' | 'history' | 'weather'>('analysis');
-  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [history, setHistory] = useState<HistoryItem[]>([MOCK_SCAN]);
 
   const handleScanComplete = (item: HistoryItem) => {
     setHistory(prev => [item, ...prev]);
